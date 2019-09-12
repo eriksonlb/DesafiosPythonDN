@@ -1,3 +1,4 @@
-x, y = 2, 5
-print(f'{x} << {y} == {x} * (2 ^ {y}) = {x << y}')
-print(f'{x} >> {y} == {x} // (2 ^ {y}) = {x >> y}')
+while True:
+    a = int(input('Valor 1 : '))
+    b = int(input('Valor 2 : '))
+    print(f'{a} + {b} = {a | b}\n')

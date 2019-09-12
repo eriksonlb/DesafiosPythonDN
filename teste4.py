@@ -1,21 +1,25 @@
-def fatorial(n):
-    if n == 1:
-        return n
-    a = fatorial(n - 1) * n
-    return ('Fatorial(' + str(n) + ' - 1) * ' + str(n) + '\n    >> fatorial(' + str((n - 1)) + ') * ' + str(n) + ' = ' + str(a) + '\n\n')
+import time
 
 
-def fibonacci(n):
-    if n <= 1:
-        return n
-    else:  
-        return str(fibonacci(n-1)) + ' + ' + str(fibonacci(n-2)) + '\n'
-        
+# for i in range(10):
+#     a = ~i
+#     print(f'~{i} = ' + str(a))
+#     time.sleep(1)
+a, b = 10000000000, 2
+while b <= 10:    
+    print(f'  ---  Usando {b}  ---  \n')
+    print(f'{b} >> 1 = ' + str(b >> 1))
+    print(f'{b} << 1 = ' + str(b << 1))
+    print(f'{b} ^ {b*2} = ' + str(b ^ (b*2)))
+    print(f'{b} | {b*2} = ' + str(b | (b*2)))
+    print(f'~{b} = ' + str(~b))
+    print('\n======================\n')
+    b += 1
+    time.sleep(1)
 
-escolha = int(input('[1] - Fatorial \n[2] - Fibonacci\n\n'))
-if escolha == 1:
-    valorFatorial = int(input('Valor: '))
-    print(fatorial(valorFatorial))
-elif escolha == 2:
-    limiteFibonacci = int(input('Limite: '))
-    print(fibonacci(limiteFibonacci))
+# for i in range(10):
+#     a = ~i
+#     print(f'~{i} = ' + str(a))
+#     time.sleep(1)
+
+# a >> 3 é o mesmo que dividir a por 2 3 vezes
