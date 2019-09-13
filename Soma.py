@@ -21,10 +21,14 @@ while b < 100:
     if type(resultado) != str:
         print(f'\n{valor1} + {valor2} =  ', end="")
         print(resultado)
+        print('    Errado!') if resultado != (valor1 + valor2) else print('    Correto!')
         print('========================\n')
+        time.sleep(0.5)
     else:
         calcError.append(str(valor1) + ' + ' + str(valor2))
     b += 1
 print(f'Calculos rejeitados:')
+cont = 0
 for i in calcError:
-    print(i)
+    cont += 1
+    print(f'{cont} - {i}')
