@@ -1,34 +1,81 @@
 from random import randint
 import time
 
+def relatorioErro(valor1, valor2, calcError):
+    if valor1 < 0 and valor2 < 0 and valor1 % 2 != 0 and valor2 % 2 != 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  negativo impar e negativo impar')
+    if valor1 < 0 and valor2 < 0 and valor1 % 2 == 0 and valor2 % 2 == 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  negativo par e negativo par')
+    if valor1 < 0 and valor2 < 0 and valor1 % 2 != 0 and valor2 % 2 == 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  negativo impar e negativo par')
+    if valor1 < 0 and valor2 < 0 and valor1 % 2 == 0 and valor2 % 2 != 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  negativo par e negativo impar') #negativos 
+    if valor1 >= 0 and valor2 >= 0 and valor1 % 2 != 0 and valor2 % 2 != 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  positivo impar e positivo impar')
+    if valor1 >= 0 and valor2 >= 0 and valor1 % 2 == 0 and valor2 % 2 == 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  positivo par e positivo par')
+    if valor1 >= 0 and valor2 >= 0 and valor1 % 2 != 0 and valor2 % 2 == 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  positivo impar e positivo par')
+    if valor1 >= 0 and valor2 >= 0 and valor1 % 2 == 0 and valor2 % 2 != 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  positivo par e positivo impar') #positivo 
+    if valor1 >= 0 and valor2 < 0 and valor1 % 2 != 0 and valor2 % 2 != 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  positivo impar e negativo impar')
+    if valor1 >= 0 and valor2 < 0 and valor1 % 2 == 0 and valor2 % 2 == 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  positivo par e negativo par')
+    if valor1 >= 0 and valor2 < 0 and valor1 % 2 != 0 and valor2 % 2 == 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  positivo impar e negativo par')
+    if valor1 >= 0 and valor2 < 0 and valor1 % 2 == 0 and valor2 % 2 != 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  positivo par e negativo impar') #negativos 
+    if valor1 < 0 and valor2 >= 0 and valor1 % 2 != 0 and valor2 % 2 != 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  negativo impar e positivo impar')
+    if valor1 < 0 and valor2 >= 0 and valor1 % 2 == 0 and valor2 % 2 == 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  negativo par e positivo par')
+    if valor1 < 0 and valor2 >= 0 and valor1 % 2 != 0 and valor2 % 2 == 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  negativo impar e positivo par')
+    if valor1 < 0 and valor2 >= 0 and valor1 % 2 == 0 and valor2 % 2 != 0:            
+        calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  negativo par e positivo impar')
+
+
+
+
 def soma(v1, v2):
     a = v1 
     b = v2       
     try:
         return a if b == 0 else soma(a ^ b, (a & b) << 1) if a < 0 else soma(b ^ a, (b & a) << 1)
     except Exception:
-        return '\n' + str(a) + ' = ' + str(bin(a)) + '\n' + str(b) + '=' + str(bin(b))
+        return 'Erro!'
 
-b = 0
-calcError = []
-while b < 100:
-    # valor1 = int(input('Primeiro valor: '))
-    # valor2 = int(input('Segundo valor: '))
-    valor1 = randint(-30, 30)
-    valor2 = randint(-30, 30)
+def somaRandom():
+    b = 0
+    relatorio = []
+    while b < 100:
+        
+        v1 = randint(-100, 100)
+        v2 = randint(-100, 100)
 
+        resultado = soma(v1, v2)
+        if type(resultado) != str:
+            print(f'\n{v1} + {v2} =  ', end="")
+            print(resultado)
+            print('    Errado!') if resultado != (v1 + v2) else print('    Correto!')
+            print('========================\n')
+            time.sleep(0.2)
+        else:
+            relatorioErro(v1, v2, relatorio)
+        b += 1
+    print(f'Calculos rejeitados:\n')
+    for i in relatorio:
+        print(i)
+
+
+def somaManual():
+    valor1 = int(input('Primeiro valor: '))
+    valor2 = int(input('Segundo valor: '))
     resultado = soma(valor1, valor2)
-    if type(resultado) != str:
-        print(f'\n{valor1} + {valor2} =  ', end="")
-        print(resultado)
-        print('    Errado!') if resultado != (valor1 + valor2) else print('    Correto!')
-        print('========================\n')
-        time.sleep(0.5)
-    else:
-        calcError.append(str(valor1) + ' + ' + str(valor2))
-    b += 1
-print(f'Calculos rejeitados:')
-cont = 0
-for i in calcError:
-    cont += 1
-    print(f'{cont} - {i}')
+    print(f'\n{valor1} + {valor2} =  ', end="")
+    print(resultado)
+
+choice = int(input('Tecle 1 para modo Automático\nOu qualquer tecla para modo Manual:  '))
+somaManual() if choice != 1 or choice != '1' else somaRandom()
+
