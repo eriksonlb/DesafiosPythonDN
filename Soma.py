@@ -36,31 +36,36 @@ def relatorioErro(valor1, valor2, calcError):
         calcError.append(str(valor1) + ' + ' + str(valor2) + '  --  negativo par e positivo impar')
 
 
-
-
 def soma(v1, v2):
     a = v1 
-    b = v2       
-    try:
-        return a if b == 0 else soma(a ^ b, (a & b) << 1) if a < 0 else soma(b ^ a, (b & a) << 1)
-    except Exception:
-        return 'Erro!'
+    b = v2
+    if (v1 < 0 or v2 < 0) and abs(a) == abs(b):
+        return 0
+    else:       
+        try:
+            return a if b == 0 else soma(a ^ b, (a & b) << 1) if a < 0 else soma(b ^ a, (b & a) << 1)
+        except Exception:
+            a = ~v1
+            b = ~v2
+            try:
+                resultado =  a if b == 0 else soma(a ^ b, (a & b) << 1) if a < 0 else soma(b ^ a, (b & a) << 1)
+                return resultado * (-1)
+            except Exception:
+                return 'Erro!'
 
 def somaRandom():
     b = 0
     relatorio = []
-    while b < 100:
-        
-        v1 = randint(-100, 100)
-        v2 = randint(-100, 100)
-
+    while b < 100000:        
+        v1 = randint(-1000000, 1000000)
+        v2 = randint(-1000000, 1000000)
         resultado = soma(v1, v2)
         if type(resultado) != str:
             print(f'\n{v1} + {v2} =  ', end="")
             print(resultado)
             print('    Errado!') if resultado != (v1 + v2) else print('    Correto!')
             print('========================\n')
-            time.sleep(0.2)
+            # time.sleep(0.2)
         else:
             relatorioErro(v1, v2, relatorio)
         b += 1
@@ -76,6 +81,10 @@ def somaManual():
     print(f'\n{valor1} + {valor2} =  ', end="")
     print(resultado)
 
-choice = int(input('Tecle 1 para modo Automático\nOu qualquer tecla para modo Manual:  '))
-somaManual() if choice != 1 or choice != '1' else somaRandom()
+# try:
+#     choice = int(input('Tecle 1 para modo Automático\nOu qualquer tecla para modo Manual:  '))
+#     somaRandom()
+# except Exception:
+# 
+somaRandom()    
 
